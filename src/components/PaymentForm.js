@@ -28,7 +28,7 @@ const PaymentForm = () => {
     const [success, setSuccess] = useState(false)
     const stripe = useStripe()
     const elements = useElements()
-
+    const [couponValue, setCouponValue] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -59,6 +59,19 @@ const PaymentForm = () => {
         }
     }
 
+    const couponButton = () => {
+        const body = {
+            coupon: couponValue
+        }
+        axios.post(`http://localhost:4000/coupon`, body)
+            .then((res) => {
+                console.log(res.data.message);
+            })
+            .catch((err) => {
+                console.log(err.response.data.message);
+            })
+    }
+
     return (
         <>
             {!success ?
@@ -67,8 +80,18 @@ const PaymentForm = () => {
                         <div className="FormRow">
                             <CardElement options={CARD_OPTIONS} />
                         </div>
+                        <div className="Coupon" style={{ marginLeft: "15px" }} >
+                            <p style={{ color: "white" }} >Enter coupon code: </p>
+                            <input
+                                style={{ padding: "10px", borderRadius: "4px", border: "none" }}
+                                placeholder="Enter coupon"
+                                value={couponValue}
+                                onChange={(e) => setCouponValue(e.target.value)}
+                            />
+                            <button style={{ padding: "10px", width: "140px", marginBottom: "10px" }} onClick={couponButton} >Add Coupon</button>
+                        </div>
                     </fieldset>
-                    <button>Pay</button>
+                    <button type="submit" >Pay</button>
                 </form>
                 :
                 <div>
