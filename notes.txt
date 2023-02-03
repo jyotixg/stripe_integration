@@ -1,0 +1,8 @@
+https://www.youtube.com/watch?v=XKWJFpZYVAQ
+
+refered above url for  creating this.
+
+in .env file, STRIPE_SECRET_TEST value is 
+the test key which i got when i created a stripe account 
+you can checkin your account, 
+we have secret key and test key
