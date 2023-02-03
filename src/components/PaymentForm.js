@@ -1,4 +1,4 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
+import { AddressElement, CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from "axios"
 import React, { useState } from 'react'
 
@@ -59,6 +59,11 @@ const PaymentForm = () => {
         }
     }
 
+
+    const AddressElementOptions = {
+        mode: "billing"
+    }
+
     const couponButton = () => {
         const body = {
             coupon: couponValue
@@ -80,6 +85,9 @@ const PaymentForm = () => {
                         <div className="FormRow">
                             <CardElement options={CARD_OPTIONS} />
                         </div>
+                        <div  style={{ margin: "15px" }} >
+                            <AddressElement options={AddressElementOptions} />
+                        </div>
                         <div className="Coupon" style={{ marginLeft: "15px" }} >
                             <p style={{ color: "white" }} >Enter coupon code: </p>
                             <input
@@ -88,7 +96,7 @@ const PaymentForm = () => {
                                 value={couponValue}
                                 onChange={(e) => setCouponValue(e.target.value)}
                             />
-                            <button style={{ padding: "10px", width: "140px", marginBottom: "10px" }} onClick={couponButton} >Add Coupon</button>
+                            <button style={{ padding: "10px", width: "140px", marginBottom: "10px", marginLeft:0 }} onClick={couponButton} >Add Coupon</button>
                         </div>
                     </fieldset>
                     <button type="submit" >Pay</button>

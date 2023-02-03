@@ -51,8 +51,9 @@ button:active {
 
 .App {
 	margin-left: 25%;
-	margin-top: 5%;
+	margin-top: 20px;
 	margin-right: 25%;
+  margin-bottom: 20px;
 }
 
 h1,
